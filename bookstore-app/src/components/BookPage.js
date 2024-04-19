@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-function BooksList() {
+function BookPage({ onAddToCart }) {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -15,10 +15,14 @@ function BooksList() {
   return (
     <div>
       {books.map(book => (
-        <div key={book.id}>{book.title}</div>
+        <div key={book.id}>
+          <h3>{book.title}</h3>
+          <p>{book.author}</p>
+          <button onClick={() => onAddToCart(book)}>Add to Cart</button>
+        </div>
       ))}
     </div>
   );
 }
 
-export default BooksList;
+export default BookPage;
