@@ -1,28 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function BookPage({ onAddToCart }) {
-  const [books, setBooks] = useState([]);
+function ProfilePage() {
+  const [user, setUser] = useState({ name: '', email: '' });
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const result = await axios.get('https://yourapi.com/books');
-      setBooks(result.data);
+    const fetchUserProfile = async () => {
+      const result = await axios.get('https://yourapi.com/user/profile');
+      setUser(result.data);
     };
-    fetchBooks();
+    fetchUserProfile();
   }, []);
+
+  const handleUpdate = async () => {
+    await axios.post('https://yourapi.com/user/update', user);
+    alert('Profile updated!');
+  };
 
   return (
     <div>
-      {books.map(book => (
-        <div key={book.id}>
-          <h3>{book.title}</h3>
-          <p>{book.author}</p>
-          <button onClick={() => onAddToCart(book)}>Add to Cart</button>
-        </div>
-      ))}
+      <h2>User Profile</h2>
+      <input
+        type="text"
+        value={user.name}
+        onChange={e => setUser({ ...user, name: e.target.value })}
+        placeholder="Name"
+      />
+      <input
+        type="email"
+        value={user.email}
+        onChange={e => setUser({ ...user, email: e.target.value })}
+        placeholder="Email"
+      />
+      <button onClick={handleUpdate}>Update Profile</button>
     </div>
   );
 }
 
-export default BookPage;
+export default ProfilePage;
+
