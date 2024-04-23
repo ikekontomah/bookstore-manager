@@ -7,7 +7,7 @@ function RegisterPage() {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('https://yourapi.com/register', { email, password });
+      const response = await axios.post('http://localhost:8080/api/admin/orders/', { email, password });
       console.log('Registration successful', response.data);
     } catch (error) {
       console.error('Registration failed', error);

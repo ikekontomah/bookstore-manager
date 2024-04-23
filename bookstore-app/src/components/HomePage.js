@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function HomePage() {
   return (
     <div>
-      <h1>Welcome to Isaac's Online Bookstore</h1>
+      <h1>Welcome to my online bookstore</h1>
       <nav>
         <ul>
           <li><Link to="/books">Books</Link></li>
