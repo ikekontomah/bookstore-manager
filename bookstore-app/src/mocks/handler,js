@@ -1,0 +1,21 @@
+import { rest } from 'msw';
+
+export const handlers = [
+  // Mock the login endpoint
+  rest.post('https://yourapi.com/login', (req, res, ctx) => {
+    return res(ctx.json({ token: 'fake-token' }));
+  }),
+
+  // Mock the fetch books endpoint
+  rest.get('http://localhost:8000/api/book/', (req, res, ctx) => {
+    return res(ctx.json([
+      { id: 1, title: 'Book 1', author: 'Author 1', price: 10 },
+      { id: 2, title: 'Book 2', author: 'Author 2', price: 15 }
+    ]));
+  }),
+
+  // Mock the add to cart endpoint
+  rest.post('http://localhost:8080/api/cart/add/', (req, res, ctx) => {
+    return res(ctx.json({ id: 1, title: 'Book 1', qty: 1, price: 10 }));
+  })
+];
